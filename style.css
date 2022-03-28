@@ -81,3 +81,7 @@ audio::-webkit-media-controls-enclosure {
   font-weight: bold;
   font-size: 20px;
 }
+
+a {
+  color: black;
+}
