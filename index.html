@@ -13,37 +13,40 @@
   </head>
 
   <body>
-    <div id="title">
-      <h1>Indice de Actividades - 7°3°</h1>
-      <h2>Cruz Lucas</h2>
+    <div id="container">
+      <div id="title">
+        <h1>Indice de Actividades - 7°3°</h1>
+        <h2>Cruz Lucas</h2>
+      </div>
+
+      <br />
+
+      <div id="tarea">
+        <ul>
+          <li>
+            <a href="./TP-N1/index.html"
+              >Trabajo Practico N°1 - HTML y GitHub</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <br /><br />
+
+      <div id="tarea2">
+        <audio id="audio" controls="">
+          <source src="Assets/Campfire Sound Effect.ogg" type="audio/ogg" />
+          No funciona, mostro
+        </audio>
+        <div id="p"><-- Activa para escuchar la musica de fondo!</div>
+      </div>
     </div>
 
-    <br />
+    <script src="Scripts/EasterEgg.js"></script>
+    <script>
+      let container = document.getElementById("container");
 
-    <div id="tarea">
-      <ul>
-        <li><a href="./TP-N1/index.html">Trabajo Practico N°1 - HTML y GitHub</a></li>
-      </ul>
-    </div>
-
-    <br /><br />
-
-    <div id="tarea2">
-      <audio id="audio" controls="">
-        <source src="Assets/Campfire Sound Effect.ogg" type="audio/ogg" />
-        No funciona, mostro
-      </audio>
-      <div id="p"><-- Activa para escuchar la musica de fondo!</div>
-    </div>
-
-    
-
-  <script src="Scripts/EasterEgg.js"></script>
-  <script>
-    let container = document.getElementById("eeg");
-
-    document.addEventListener("keyup", checkEasterEgg);
-  </script>
-
+      document.addEventListener("keyup", checkEasterEgg);
+    </script>
   </body>
 </html>

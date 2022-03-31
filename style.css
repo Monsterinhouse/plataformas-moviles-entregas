@@ -83,12 +83,7 @@ a {
 
 
 
-.eeg iframe {
-  height: 100%;
-  width: 100%;
-}
-
-.eeg {
+.easterEgg iframe {
   position: fixed;
   top: 0;
   left: 0;
