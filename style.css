@@ -81,7 +81,14 @@ a {
   color: black;
 }
 
-.ee {
+
+
+.eeg iframe {
+  height: 100%;
+  width: 100%;
+}
+
+.eeg {
   position: fixed;
   top: 0;
   left: 0;
@@ -89,7 +96,3 @@ a {
   height: 100%;
 }
 
-.ee iframe {
-  height: 100%;
-  width: 100%;
-}
