@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+      crossorigin="anonymous"
+    ></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TP-N7 - PokeApi</title>
+  </head>
+  <body>
+    <nav class="nav p-3 bg-dark">
+      <h1 class="text-white">PokeApi</h1>
+      <div class="navbar text-white">
+        <ul class="nav-item text-center">
+          Faltan fotos. No termine de entender como era para ponerlas :D
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row"></div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="pokeModal"
+      tabindex="-1"
+      aria-labelledby="pokeModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="pokeModalLabel"></h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const createCard = (pokemon) => {
+        const cardElement = document.createElement("div");
+        const cardBodyElement = document.createElement("div");
+        const cardTitleElement = document.createElement("h5");
+        const cardTextElement = document.createElement("p");
+        const cardButtonElement = document.createElement("button");
+        const cardImageElement = document.createElement("img");
+
+        const capitalized =
+          pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+
+        fetch(pokemon.url)
+          .then((res) => res.json())
+          .then((data) => {
+            cardTitleElement.innerText = capitalized;
+          });
+
+        cardElement.className = "card";
+        cardBodyElement.className = "card-body";
+        cardTitleElement.className = "card-title";
+        cardTextElement.className = "card-text";
+        cardButtonElement.className = "btn btn-primary";
+
+        cardButtonElement.innerHTML = "Ver Mas";
+        cardImageElement.src = "";
+
+        cardButtonElement.addEventListener("click", () => {
+          const modal = new bootstrap.Modal(
+            document.querySelector("#pokeModal")
+          );
+
+          fetch(pokemon.url)
+            .then((res) => res.json())
+            .then((data) => {
+              document.querySelector(".modal-title").innerText = capitalized;
+              document.querySelector(".modal-body").innerHTML = data.stats
+                .map(
+                  (stat) =>
+                    stat.stat.name.toUpperCase() +
+                    ": " +
+                    stat.base_stat +
+                    "<br>"
+                )
+                .join(" ");
+            });
+
+          modal.show();
+        });
+
+        cardBodyElement.appendChild(cardTitleElement);
+        cardBodyElement.appendChild(cardTextElement);
+        cardBodyElement.appendChild(cardButtonElement);
+        cardElement.appendChild(cardBodyElement);
+        return cardElement;
+      };
+
+      const rowElement = document.querySelector(".row");
+      (async () => {
+        const res = await fetch(
+          "https://pokeapi.co/api/v2/pokemon?offset=0&limit=151"
+        );
+        const data = await res.json();
+
+        data.results.forEach((pokemon) => {
+          const colElement = document.createElement("div");
+          const pokemonCard = createCard(pokemon);
+
+          colElement.className = "col-3 p-2";
+
+          colElement.append(pokemonCard);
+          rowElement.append(colElement);
+        });
+      })();
+    </script>
+  </body>
+</html>
